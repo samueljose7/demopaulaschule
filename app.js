@@ -89,3 +89,28 @@ form.addEventListener('focusout', () => {
     if (!form.contains(document.activeElement) || document.activeElement.tagName === 'BUTTON') mobileCTA.classList.remove('is-hidden');
   });
 });
+
+// Filtro interativo e animação suave na seção de avaliações
+const reviewFilterBtns = document.querySelectorAll('.review-filter-btn');
+const reviewCards = document.querySelectorAll('.review-card');
+
+reviewFilterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    reviewFilterBtns.forEach(b => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    const filter = btn.dataset.filter;
+
+    reviewCards.forEach(card => {
+      const match = filter === 'all' || card.dataset.category === filter;
+      if (match) {
+        card.classList.remove('is-hidden');
+        card.style.animation = 'none';
+        card.offsetHeight; // trigger reflow
+        card.style.animation = 'reviewFadeIn 0.35s ease forwards';
+      } else {
+        card.classList.add('is-hidden');
+      }
+    });
+  });
+});
+
