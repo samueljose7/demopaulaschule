@@ -79,16 +79,6 @@ lightbox.addEventListener('close', () => {
   document.body.classList.remove('modal-open');
   photoTrigger?.focus();
 });
-// Evita que a barra fixa ocupe espaço enquanto a pessoa preenche os campos no celular.
-const mobileCTA = document.querySelector('.floating-wa');
-form.addEventListener('focusin', e => {
-  if (e.target.matches('input:not([type="hidden"]), select')) mobileCTA.classList.add('is-hidden');
-});
-form.addEventListener('focusout', () => {
-  requestAnimationFrame(() => {
-    if (!form.contains(document.activeElement) || document.activeElement.tagName === 'BUTTON') mobileCTA.classList.remove('is-hidden');
-  });
-});
 
 // Filtro interativo e animação suave na seção de avaliações
 const reviewFilterBtns = document.querySelectorAll('.review-filter-btn');
